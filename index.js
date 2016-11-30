@@ -23,7 +23,7 @@ class App extends Component {
             });
         }
 
-        this._requestAnimFrame = requestAnimationFrame(this.tick.bind(this));        
+        this._requestAnimFrame = requestAnimationFrame(this.tick.bind(this));
     }
 
     stop() {
@@ -44,8 +44,8 @@ class App extends Component {
 }
 
 App.propTypes = {
-        time: PropTypes.number
-    }
+    time: PropTypes.number
+};
 
 const element = <App time={0} text="0"/>;
 
