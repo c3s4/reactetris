@@ -13,13 +13,20 @@ class App extends Component {
         this.state.request = 0;
         this.state.prevTimestamp = 0;
         this._requestAnimFrame = null;
+        this.pressedKey = null;
+    }
+
+    componentWillMount() {
+        document.addEventListener('keydown', this.keydown.bind(this), false);
+        document.addEventListener('keyup', this.keyup.bind(this), false);
     }
 
     tick(timestamp) {
         if ((timestamp - this.state.prevTimestamp) > 1000 ) {
             this.setState({
                 time: this.state.time + 1,
-                prevTimestamp: timestamp
+                prevTimestamp: timestamp,
+                pressedKey: this.pressedKey
             });
         }
 
@@ -32,12 +39,32 @@ class App extends Component {
         }
     }
 
+    keydown(evt) {
+        switch (evt.key) {
+            case 'ArrowDown':
+                this.pressedKey = 'D';
+            break;
+            case 'ArrowLeft':
+                this.pressedKey = 'L';
+            break;
+            case 'ArrowRight':
+                this.pressedKey = 'R';
+            break;
+            default:
+            return; // Quit when this doesn't handle the key event.
+        }
+    }
+
+    keyup(evt) {
+        this.pressedKey = null;
+    }
+
     render() {
         return (
             <div>
                 <button onClick={this.tick.bind(this)}>START</button>
                 <button onClick={this.stop.bind(this)}>STOP</button>
-                <Board text={this.state.time} time={this.state.time}/>
+                <Board text={this.state.time} time={this.state.time} pressedKey={this.state.pressedKey}/>
             </div>
             );
     }
