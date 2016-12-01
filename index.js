@@ -12,6 +12,7 @@ class App extends Component {
         this.state.time = props.time;
         this.state.request = 0;
         this.state.prevTimestamp = 0;
+        this.state.prevMoveTimestamp = 0;
         this._requestAnimFrame = null;
         this.pressedKey = null;
     }
@@ -28,6 +29,8 @@ class App extends Component {
                 prevTimestamp: timestamp,
                 pressedKey: this.pressedKey
             });
+        } else if ((this.pressedKey) && ((timestamp - this.state.prevMoveTimestamp) > 60)) {
+            this.setState({prevMoveTimestamp: timestamp, time: this.state.time, pressedKey: this.pressedKey});
         }
 
         this._requestAnimFrame = requestAnimationFrame(this.tick.bind(this));
