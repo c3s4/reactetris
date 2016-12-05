@@ -43,6 +43,7 @@ class App extends Component {
     }
 
     keydown(evt) {
+        console.log(evt.key);
         switch (evt.key) {
             case 'ArrowDown':
                 this.pressedKey = 'D';
@@ -53,6 +54,9 @@ class App extends Component {
             case 'ArrowRight':
                 this.pressedKey = 'R';
             break;
+            case 'Enter':
+                this.pressedKey = 'E';
+                break;
             default:
             return; // Quit when this doesn't handle the key event.
         }
