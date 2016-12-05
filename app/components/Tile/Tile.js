@@ -21,7 +21,8 @@ class Tile extends Component {
         this.calculateCoords();
         this._movingTileStyle = update(styles, {
             left: {$set: this._leftPos},
-            top: {$set: this._topPos}
+            top: {$set: this._topPos},
+            backgroundColor: {$set: this.props.color}
         });
         return (<div style={this._movingTileStyle}/>);
     }
